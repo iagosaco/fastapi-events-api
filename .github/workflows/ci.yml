@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - run: pip install -r requirements.txt
+
+    - run: ruff .
+
+    - run: pytest tests/unit
+
+    - name: Start API
+      run: |
+        uvicorn app.main:app &
+        sleep 5
+
+    - run: pytest tests/e2e
