@@ -23,7 +23,7 @@ jobs:
 
     # 4️⃣ Análisis estático con Ruff
     - name: Run Ruff
-      run: ruff .
+      run: ruff check .
 
     # 5️⃣ Tests unitarios
     - name: Run unit tests
